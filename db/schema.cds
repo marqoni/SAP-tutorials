@@ -16,5 +16,15 @@ using { managed } from '@sap/cds/common';
     description  : String;
     owner        : String;
     timeline     : String;
+    imply        : Association to Results;
     risks        : Association to many Risks on risks.miti = $self;
+  }
+
+  entity Results : managed {
+    key ID       : UUID  @(Core.Computed : true);
+    description  : String;
+    implication  : String(10);
+    owner        : String;
+    timeline     : String;
+    rationale    : Association to many Mitigations on rationale.imply = $self;
   }
